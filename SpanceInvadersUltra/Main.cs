@@ -7,16 +7,16 @@ namespace SpanceInvadersUltra
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Main : Game
+    public class Main : GameEnvironment
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
         public Main()
         {
-            graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            Screen = new Point(1200, 768);
+
+            SetFullScreen(false);
         }
 
         protected override void LoadContent()
@@ -25,6 +25,9 @@ namespace SpanceInvadersUltra
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            GameStateManager.AddGameState("playingState", new PlayingState());
+            GameStateManager.SwitchTo("playingState");
+            
         }
     }
 }
