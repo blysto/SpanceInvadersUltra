@@ -16,24 +16,26 @@ namespace SpanceInvadersUltra
         protected float health;
         protected float armour;
         protected float bullets;
-        protected float speed = 100;
+        protected float speed = 300;
+        protected float minSpeed = -300;
         protected float rotation;
 
-        public SpaceShipGeneral(float scale) : base("")
+        public SpaceShipGeneral() : base("spaceship")
         {
             position = new Vector2(Main.Screen.X / 2, Main.Screen.Y / 2);     
         }
 
         public override void HandleInput(InputHelper inputHelper)
         {
-            if (inputHelper.KeyPressed(Keys.Left))
-                velocity.X -= speed;
-            else if (inputHelper.KeyPressed(Keys.Right))
-                velocity.X += speed;
-            else if (inputHelper.KeyPressed(Keys.Up))
-                velocity.Y -= speed;
-            else if (inputHelper.KeyPressed(Keys.Down))
-                velocity.Y += speed;
+            velocity = Vector2.Zero;
+            if (inputHelper.IsKeyDown(Keys.Left))
+                velocity.X = minSpeed;
+            else if (inputHelper.IsKeyDown(Keys.Right))
+                velocity.X = speed;
+            else if (inputHelper.IsKeyDown(Keys.Up))
+                velocity.Y = minSpeed;
+            else if (inputHelper.IsKeyDown(Keys.Down))
+                velocity.Y = speed;    
             
             base.HandleInput(inputHelper);
         }
